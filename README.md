@@ -8,6 +8,27 @@ Kubebuilder is a framework for building Kubernetes APIs using [custom resource d
 **Note:** kubebuilder does not exist as an example to *copy-paste*, but instead provides powerful libraries and tools
 to simplify building and publishing Kubernetes APIs from scratch.
 
+### Builde from source for each platforms
+
+```
+miyamoto@macbookpro:>> git clone -b v2.0.0 https://github.com/qiyongxiao/kubebuilder.git $GOPATH/sigs.k8s.io/kubebuilder
+miyamoto@macbookpro:>> cd $GOPATH/sigs.k8s.io/kubebuilder
+miyamoto@macbookpro:>> vim cmd/version/version.go
+var (
+    kubeBuilderVersion      = "v2.0.0"
+    kubernetesVendorVersion = "v1.13.7"
+    goos                    = "linux"
+    goarch                  = "mips64le"
+    gitCommit               = "b31cc5d96dbc91749eb49c2cf600bd951a46d4bd" // sha1 from git, output of $(git rev-parse HEAD)
+    buildDate = "2019-08-31T7:50:00Z"
+)
+:x
+miyamoto@macbookpro:/Users/miyamoto/go/src/sigs.k8s.io/kubebuilder>>make build
+go build -o bin/kubebuilder ./cmd
+miyamoto@macbookpro:/Users/miyamoto/go/src/sigs.k8s.io/kubebuilder>>./bin/kubebuilder version
+Version: version.Version{KubeBuilderVersion:"v2.0.0", KubernetesVendor:"v1.13.7", GitCommit:"b31cc5d96dbc91749eb49c2cf600bd951a46d4bd", BuildDate:"2019-08-31T7:50:00Z", GoOs:"linux", GoArch:"mips64le"}
+```
+
 ### Installation
 
 It is strongly recommended that you use a released version. Release binaries are available on the [releases](https://github.com/kubernetes-sigs/kubebuilder/releases) page.
